@@ -10,11 +10,11 @@ CURRENT_DIRECTIONS = 'You are a tool that takes in a string that consists of all
 
 class ChatGPTBot:
     def __init__(self, system_directions: str) -> None:
-        openai.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = "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"  # os.getenv("OPENAI_API_KEY")
         self.system_message = {"role": "system", "content": system_directions}
 
     def parse(self, user_message: str):
-        openai.api_key = os.getenv("CHAT_GPT_API_KEY")
+        # openai.api_key = os.getenv("CHAT_GPT_API_KEY")
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -24,7 +24,7 @@ class ChatGPTBot:
                     "content": user_message,
                 },
             ],
-            temperature=1,
+            temperature=0.2,
             max_tokens=1500,
             top_p=1,
             frequency_penalty=0,
@@ -110,6 +110,7 @@ class Scraper:
         if gpt_processed_string != "ERROR: Not a job posting.":
             output = self._makeDictionary(gpt_processed_string)
         else:
+            logging.error(f"ERROR: Not a job posting \n {gpt_processed_string}")
             output = {}
         return output
 
