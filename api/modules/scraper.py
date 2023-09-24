@@ -10,7 +10,7 @@ CURRENT_DIRECTIONS = 'You are a tool that takes in a string that consists of all
 
 class ChatGPTBot:
     def __init__(self, system_directions: str) -> None:
-        openai.api_key = "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"  # os.getenv("OPENAI_API_KEY")
+        openai.api_key = os.getenv("OPENAI_API_KEY")
         self.system_message = {"role": "system", "content": system_directions}
 
     def parse(self, user_message: str):
